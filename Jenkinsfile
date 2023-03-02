@@ -20,7 +20,7 @@ node {
             }catch(exc){
             echo exc
             }
-        bat "docker run --name some-jenkins -d -p 8000:8080 some-jenkins:${env.BUILD_NUMBER}"
+        bat "docker run --name some-jenkins -d -p 8000:8000 some-jenkins:${env.BUILD_NUMBER}"
     }
     }catch(e){
         echo e
