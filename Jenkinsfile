@@ -1,6 +1,6 @@
 node {
     def WORKSPACE = "/var/lib/jenkins/workspace/some-jenkins"
-    def dockerImageTag = "some-jenkins{env.BUILD_NUMBER}"
+    def dockerImageTag = "some-jenkins:${env.BUILD_NUMBER}"
 
     try{
     stage('Clone Repo') {
@@ -14,10 +14,8 @@ node {
 
     stage('Deploy docker'){
         echo "Docker Image Tag Name Some jenkins: ${dockerImageTag}"
-        echo "Complete comand docker stop some-jenkins || true && docker rm some-jenkins || true"
-        sh "docker stop some-jenkins || true && docker rm some-jenkins || true"
-        echo "Complete comand docker run --name some-jenkins -d -p 8000:8080 some-jenkins:${env.BUILD_NUMBER}"
-        sh "docker run --name some-jenkins -d -p 8000:8080 some-jenkins:${env.BUILD_NUMBER}"
+        bat "docker stop some-jenkins || true && docker rm some-jenkins || true"
+        bat "docker run --name some-jenkins -d -p 8000:8080 some-jenkins:${env.BUILD_NUMBER}"
     }
     }catch(e){
         throw e.getMessage
