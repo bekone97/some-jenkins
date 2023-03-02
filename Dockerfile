@@ -4,7 +4,7 @@ FROM gradle AS build
 # Build Stage
 WORKDIR /opt/app
 COPY ./ /opt/app
-RUN ./gradlew build
+RUN gradle build
 
 #Docker Build Stage
 FROM openjdk:17-alpine
