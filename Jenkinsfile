@@ -14,7 +14,7 @@ node {
 
     stage('Deploy docker'){
         echo "Docker Image Tag Name Some jenkins: ${dockerImageTag}"
-        bat "docker stop some-jenkins:${env.BUILD_NUMBER-1} || true && docker rm some-jenkins || true"
+        bat "docker stop some-jenkins:${env.BUILD_NUMBER-1}"
         bat "docker run --name some-jenkins -d -p 8000:8080 some-jenkins:${env.BUILD_NUMBER}"
     }
     }catch(e){
