@@ -18,6 +18,7 @@ node {
         bat "docker run --name some-jenkins -d -p 8000:8080 some-jenkins:${env.BUILD_NUMBER}"
     }
     }catch(e){
-        throw e.getMessage
+        echo e
+        throw e
     }
 }
