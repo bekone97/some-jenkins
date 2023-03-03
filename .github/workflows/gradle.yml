@@ -28,15 +28,7 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-    - name: Completing unit and integration testing
-      uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
-      with:
-        arguments: test
-    - name: Save state
-      run: echo "{name}={value}" >> $GITHUB_STATE
-
-    - name: Set output
-      run: echo "{name}={value}" >> $GITHUB_OUTPUT
-
+    - name: Build with Gradle
+      run: ./gradlew test
     - name: Message
       run: echo "Finished everything in develop"
