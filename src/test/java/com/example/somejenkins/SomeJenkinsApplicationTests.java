@@ -8,6 +8,11 @@ class SomeJenkinsApplicationTests {
 
     @Test
     void contextLoads() {
+        System.out.println("UNIIIIIIIIIIIIIIIIIIIIIIIIIT");
+        System.out.println("UNIIIIIIIIIIIIIIIIIIIIIIIIIT");
+        System.out.println("UNIIIIIIIIIIIIIIIIIIIIIIIIIT");
+        System.out.println("UNIIIIIIIIIIIIIIIIIIIIIIIIIT");
+        System.out.println("UNIIIIIIIIIIIIIIIIIIIIIIIIIT");
     }
 
 }

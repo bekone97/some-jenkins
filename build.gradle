@@ -9,7 +9,16 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 targetCompatibility = '17'
 java.sourceCompatibility= JavaVersion.VERSION_17
-
+sourceSets {
+    integrationTest {
+        compileClasspath += sourceSets.main.output
+        runtimeClasspath += sourceSets.main.output
+    }
+}
+configurations {
+    integrationTestImplementation.extendsFrom testImplementation
+    integrationTestRuntimeOnly.extendsFrom testRuntimeOnly
+}
 repositories {
     mavenCentral()
 }
@@ -17,8 +26,31 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'com.h2database:h2:2.1.214'
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    implementation 'org.liquibase:liquibase-core'
+    implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+
 }
 
-tasks.named('test') {
+tasks.withType(Test){
     useJUnitPlatform()
 }
+compileJava {
+    options.compilerArgs += [
+            '-Amapstruct.defaultComponentModel=spring'
+    ]
+}
+task integrationTest(type: Test){
+    description = 'Run integration tests'
+    group = 'verification'
+
+    testClassesDirs = sourceSets.integrationTest.output.classesDirs
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    shouldRunAfter test
+}
+
+check.dependsOn integrationTest
